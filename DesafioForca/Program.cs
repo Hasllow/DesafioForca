@@ -27,7 +27,7 @@ namespace DesafioForca
 
             
             if (value == 1) forca1.Game();
-            forca2.Game();
+            else forca2.Game();
         }
     }
 
