@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Security.Cryptography;
 
 namespace DesafioForca
@@ -194,13 +195,13 @@ namespace DesafioForca
                 "terra",
                 "jardim",
                 "brigadeiro",
-                "lingua",
+                "língua",
                 "sapato",
                 "espelho",
                 "mar",
                 "livro",
                 "estudar",
-                "sofa",
+                "sofá",
                 "geladeira",
                 "aeroporto",
                 "almofada",
@@ -246,7 +247,7 @@ namespace DesafioForca
         {
             var indexes = selectedWord
                 .Select((ch, index) => (ch, index))
-                .Where(tuple => tuple.ch.ToString() == guess)
+                .Where(tuple => string.Compare(tuple.ch.ToString(), guess, CultureInfo.InvariantCulture, CompareOptions.IgnoreNonSpace) == 0)
                 .Select(tuple => tuple.index)
                 .ToList();
 
@@ -255,7 +256,7 @@ namespace DesafioForca
 
         void ReplaceCharacters()
         {
-            indexes.ForEach(value => misteryWord = misteryWord.Remove(value, 1).Insert(value, guess));
+            indexes.ForEach(value => misteryWord = misteryWord.Remove(value, 1).Insert(value, selectedWord[value].ToString()));
         }
 
         bool PlayAgain(bool win)
